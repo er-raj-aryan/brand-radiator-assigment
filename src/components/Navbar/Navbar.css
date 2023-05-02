@@ -1,0 +1,74 @@
+.navbar{
+ display: flex;
+ border: 0px solid;
+ justify-content: space-between;
+ align-items: center;
+ padding: 20px;
+ gap: 10px;
+ /* background-color: rgba(34, 192, 250, 0.538); */
+}
+
+.pageLinksContainer{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 20px;
+}
+
+.pageLink{
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+}
+
+.menuIcon{
+    display: none !important;
+    cursor: pointer;
+}
+
+.menuLinksContainer{
+    list-style: none;
+    background-color: rgba(215, 214, 214, 0.752);
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.menuLink{
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.menuLink:hover{
+    background: black;
+    color: white;
+    font-weight: 700;
+}
+
+.active {
+    display: flex;
+}
+
+.disable{
+    display: none;
+}
+
+.adminLogin{
+    background-color: rgba(24, 211, 249, 0.872);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+@media only screen and (max-width:760px) {
+    .pageLink{
+        display: none;
+    }
+    .menuIcon{
+        display: block !important;
+    }
+}
