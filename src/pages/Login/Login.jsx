@@ -59,6 +59,7 @@ function Login() {
         </div>
       </form>
       <div className="formErrorMessage">{errorMessage}</div>
+      <div>Note:- for login Email: admin@mail.com && Password: admin123</div>
     </div>
   );
 }
