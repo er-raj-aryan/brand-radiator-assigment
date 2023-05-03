@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
 import "./ContactUs.css";
 
 function ContactUs() {
@@ -8,16 +9,35 @@ function ContactUs() {
     message:''
   });
   const [errorMessage,setErrorMessage] = useState('');
+  const [successMessage,setSuccessMessage] = useState('');
+  const [storedData,setStoredData]= useState([]);
 
+  useEffect(() => {
+    const CookiesData = Cookies.get('ContactUs');
+    if(CookiesData && CookiesData.length > 0){
+      setStoredData(JSON.parse(CookiesData));
+    }
+  },[])
 
   function handleSubmit(event){
     event.preventDefault();
+    const tFormData = storedData;
     if(formData.email !== '' && formData.message !== '' && formData.name !== ''){
-
+      tFormData.push(formData);
+      Cookies.set('ContactUs',JSON.stringify(tFormData));
+      setSuccessMessage('Successfully submitted we connect with you soon')
+      resetForm();
     } else {
-      setErrorMessage('Please fill the required field')
+      setErrorMessage('Please fill all the required field')
     }
-
+  }
+  
+  function resetForm(){
+    setFormData({
+      name:'',
+      email:'',
+      message:''
+    })
   }
 
   function handleInput(event){
@@ -39,6 +59,7 @@ function ContactUs() {
           flexDirection: "column",
           width: "500px",
           gap: 35,
+          padding:20,
         }}
         method="POST"
         onSubmit={handleSubmit}
@@ -59,9 +80,10 @@ function ContactUs() {
           />
         </div>
         <div className="submit-button-container">
-          <input type="submit" className="form-submit-button" />
+          <input style={{cursor:'pointer'}} type="submit" className="form-submit-button" />
         </div>
       </form>
+      <div className="formSuccessMessage">{successMessage}</div>
       <div className="formErrorMessage">{errorMessage}</div>
     </div>
   );

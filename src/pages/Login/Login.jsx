@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [formData,setFormData] = useState({
-    name:'',
     email:'',
-    message:''
+    password:'',
   });
   const [errorMessage,setErrorMessage] = useState('');
+  let navigate = useNavigate();
 
 
   function handleSubmit(event){
     event.preventDefault();
-    if(formData.email !== '' && formData.message !== '' && formData.name !== ''){
-
+    if(formData.email === 'admin@mail.com' && formData.password === 'admin123'){
+      navigate('/admin');
+      sessionStorage.setItem('adminLogin',true);
+      window.location.reload();
     } else {
-      setErrorMessage('Please fill the required field')
+      setErrorMessage('Please fill the required field');
     }
-
   }
 
   function handleInput(event){
@@ -39,15 +41,16 @@ function Login() {
           flexDirection: "column",
           width: "500px",
           gap: 35,
+          padding:20,
         }}
         method="POST"
         onSubmit={handleSubmit}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           <label>Email<span className="required">*</span></label>
-          <input className="standard-input" name="name" value={formData.name} onChange={handleInput}/>
+          <input className="standard-input" name="email" value={formData.email} onChange={handleInput}/>
           <label>Password<span className="required">*</span></label>
-          <input className="standard-input" name="email" onChange={handleInput} value={formData.email} />
+          <input className="standard-input" name="password" onChange={handleInput} value={formData.password} />
         </div>
         <div className="login-submit-container">
           <button type="submit" className="form-login-button" >
@@ -60,4 +63,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Login;
